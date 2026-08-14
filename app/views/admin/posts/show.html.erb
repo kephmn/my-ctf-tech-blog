@@ -1,0 +1,9 @@
+<div class="max-w-3xl mx-auto py-10">
+    <h1 class="text-3xl font-bold"><%= @post.title %></h1>
+    <p class="text-sm text-gray-500 mb-4">
+        <%= @post.category %> - <%= @post.published? ? "Published" : "Draft" %>
+    </p>
+
+    <div class="prose"><%= markdown(@post.body) %></div>
+    <%= link_to "Edit", edit_admin_post_path(@post), class: "text-blue-500 underline" %>
+</div>

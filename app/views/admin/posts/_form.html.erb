@@ -1,0 +1,38 @@
+<%= form_with model: [:admin, @post], local: true, class: "space-y-4 max-w-2xl" do |form| %>
+    <% if @post.errors.any? %>
+        <div class="bg-red-50 text-red-700 p-4 rounded">
+            <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= form.label :title, class: "block font-medium" %>
+        <%= form.text_field :title, class: "w-full border rounded p-2" %>
+    </div>
+
+    <div>
+        <%= form.label :category, class: "block font-medium" %>
+        <%= form.select :category, ["ctf", "writeup", "tech"], {}, class: "w-full border rounded p-2" %>
+    </div>
+
+    <div>
+        <%= form.label :tag_names, "Tags (comma separated)", class: "block font-medium" %>
+        <%= form.text_area :tag_names, rows: 10, class: "w-full border rounded p-2" %>
+    </div>
+
+    <div>
+        <%= form.label :body, "Body (Markdown)", class: "block font-medium" %>
+        <%= form.text_area :body, rows: 10, class: "w-full border rounded p-2" %>
+    </div>
+
+    <div> 
+        <%= form.check_box :published %>
+        <%= form.label :published, "Published" %>
+    </div>
+
+    <%= form.submit class: "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" %>
+<% end %>

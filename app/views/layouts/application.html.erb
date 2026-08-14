@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> My Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "rouge", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <nav class="border-b p-4 flex justify-between max-w-3xl mx-auto">
+      <%= link_to "My Blog", root_path, class: "font-bold" %>
+      <div class="space-x-4 text-sm">
+        <%= link_to "CTF", category_path("ctf") %>
+        <%= link_to "Tech", category_path("tech") %>
+        <% if admin_signed_in? %>
+          <%= link_to "Admin", admin_posts_path %>
+          <%= button_to "Logout", destroy_admin_session_path, method: :delete %>
+        <% end %>
+      </div>
+    </nav>
+    <% flash.each do |type, message| %>
+      <div class="max-w-3xl mx-auto mt-4 p-2 bg-gray-100 text-sm rounded">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
